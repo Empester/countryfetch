@@ -30,19 +30,25 @@ def fetch_country_data(iso_code):
 
         os.system(f"wget -q {flag_url} -O {flag_file}")
 
+        # Define separator matching the image width
+        separator_length = 60
         print("\nCountry Information:")
-        print("--------------------")
-        os.system(f"terminal_images -w 40 {flag_file}")
-        print(f"Name: {country_data['name']}")
-        print(f"Capital: {country_data['capital']}")
-        print(f"Alt Spellings: {', '.join(country_data['altSpellings'])}")
-        print(f"Region: {country_data['region']}")
-        print(f"Demonym: {country_data['demonym']}")
-        print(f"Native Name: {country_data['nativeName']}")
-        print("Languages:")
+        print("-" * separator_length)
+
+        # Display the flag
+        os.system(f"chafa --size=60x80 --format=ansi {flag_file}")
+
+        # Properly formatted text
+        print(f"{'Name:':<15}{country_data['name']}")
+        print(f"{'Capital:':<15}{country_data['capital']}")
+        print(f"{'Alt Spellings:':<15}{', '.join(country_data['altSpellings'])}")
+        print(f"{'Region:':<15}{country_data['region']}")
+        print(f"{'Demonym:':<15}{country_data['demonym']}")
+        print(f"{'Native Name:':<15}{country_data['nativeName']}")
+        print(f"{'Languages:':<15}")
         for language in country_data["languages"]:
-            print(f"  - {language['name']} ({language['nativeName']})")
-        print(f"CIOC: {country_data['cioc']}")
+            print(f"{'':<15}- {language['name']} ({language['nativeName']})")
+        print(f"{'CIOC:':<15}{country_data['cioc']}")
 
         os.remove(flag_file)
     else:
@@ -56,9 +62,9 @@ Options:
   COUNTRY_NAME_OR_ISO   The name or ISO Alpha-2 code of the country you want to fetch data for.
 
 Examples:
-  countryfetch IL             Fetch data for Israel using ISO Alpha-2 code.
-  countryfetch israel         Fetch data for Israel using the country name (case-insensitive).
-  countryfetch romani         Fetch data for Romania (auto-detected from closest match).
+  countryfetch DE             Fetch data for Germany using ISO Alpha-2 code.
+  countryfetch germany         Fetch data for Germany using the country name (case-insensitive).
+  countryfetch franc         Fetch data for France (auto-detected from closest match).
 """
     print(help_text)
 
@@ -79,3 +85,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
