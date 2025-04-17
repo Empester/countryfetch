@@ -1,0 +1,1 @@
+deno install --allow-read --allow-net --global --allow-import -f -n terminal_images https://deno.land/x/terminal_images@3.1.0/cli.ts
